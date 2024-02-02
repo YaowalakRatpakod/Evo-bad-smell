@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #External
+    'rest_framework.authtoken',
     'rest_framework',
     'corsheaders',
     'djoser',
@@ -84,7 +85,9 @@ ROOT_URLCONF = 'fullback.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),
+                 os.path.join(BASE_DIR, 'users', 'templates', 'users'),],
+            # ตรวจสอบว่าไดเรกทอรี 'templates' ถูกต้อง
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

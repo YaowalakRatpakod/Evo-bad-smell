@@ -17,7 +17,7 @@ class CreateUserSerializer(UserCreateSerializer):
         is_active = serializers.BooleanField(default=True)
 
 class UserSerializer(serializers.ModelSerializer):
-    # id = serializers.IntegerField()
+    
     class Meta:
         model = User
         fields = ['id', 'full_name']
@@ -49,7 +49,6 @@ class ConsultationRequestSerializer(serializers.ModelSerializer):
             # user_instance = User.objects.get(full_name=user_data['full_name'])
             # ใช้ instance ของ User ในการสร้าง ConsultationRequest
             consultation_request = ConsultationRequest.objects.create(
-                # user=user_instance,
                 user=self.context['request'].user,
                 topic_code=validated_data['topic_code'],
                 topic_title=validated_data['topic_title'],

@@ -43,7 +43,7 @@ class ConsultationRequest(models.Model):
         "UP01": "UP01",
         "UP02": "UP02",
         "UP03": "UP03",
-        "UP03.1": "UP03.1",
+        "UP03-1": "UP03.1",
         "UP05": "UP05",
         "UP06": "UP06",
         "UP07": "UP07",
@@ -56,7 +56,7 @@ class ConsultationRequest(models.Model):
         "UP14": "UP14",
         "UP17": "UP17",
         "UP18": "UP18",
-        "UP20.1": "UP20.1",
+        "UP20-1": "UP20.1",
         "UP24": "UP24",
         "UP25": "UP25",
         "UP29": "UP29",
@@ -97,15 +97,9 @@ class ConsultationRequest(models.Model):
         ('Appointment', 'การนัดหมาย'),
         ]
     
-    full_name = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name='consultation_requests',  # เพิ่มบรรทัดนี้
-        null=True,
-        default=None
-    )    # tel = models.CharField(User)
-    topic_code = models.CharField(max_length=10, choices=TOPIC_CODE)  # แก้ไขตามความเหมาะสม
-    topic_title = models.CharField(max_length=10, choices=TOPIC_TITLE)
+    
+    topic_id = models.CharField(max_length=10, choices=TOPIC_CODE, default='default_value_here')  # แก้ไขตามความเหมาะสม
+    topic_section = models.CharField(max_length=10, choices=TOPIC_TITLE)
     submission_date = models.DateTimeField(null=True, blank=True, default=timezone.now)
     received_date = models.DateTimeField(null=True, blank=True, default=timezone.now)
     details = models.TextField()
@@ -114,12 +108,12 @@ class ConsultationRequest(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=False)
 
-
+    
 # คลังเก็บรายการคำขอที่เสร็จสิ้นแล้ว
 class CompletedConsultation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    topic_code = models.CharField(max_length=20)
-    topic_title = models.CharField(max_length=255)
+    topic_id = models.CharField(max_length=20)
+    topic_section = models.CharField(max_length=255)
     submission_date = models.DateTimeField()
     details = models.TextField()
     document = models.ImageField(upload_to='completed_consultations/', null=True, blank=True)

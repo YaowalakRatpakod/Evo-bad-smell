@@ -52,9 +52,9 @@ class UserAdmin(BaseUserAdmin):
     )
 
 class ConsultationRequestAdmin(admin.ModelAdmin):
-    list_display = ['topic_code','topic_title', 'submission_date', 'status']
-    list_filter = ['topic_code','topic_title','submission_date','status']
-    search_fields = ['topic_code']
+    list_display = ['user','topic_id','topic_section', 'submission_date', 'status']
+    list_filter = ['user','topic_id','topic_section','submission_date','status']
+    search_fields = ['topic_id']
 
 
 admin.site.register(User, UserAdmin)
